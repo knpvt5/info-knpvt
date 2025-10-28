@@ -5,3 +5,5 @@ function test() {
     const d = 4;
     const e = 5;
 }
+
+console.log("hiii")

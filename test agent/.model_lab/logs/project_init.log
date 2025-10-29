@@ -1,0 +1,9 @@
+[2025-10-29T02:26:34.574Z] [INFO] Start running script c:\Users\karan_pnrp70e\.vscode\extensions\ms-windows-ai-studio.windows-ai-studio-0.24.1-win32-x64\resources\modelLab\check_windows_app_runtime.py with python path C:\Users\karan_pnrp70e\.local\bin\uv.exe.
+[2025-10-29T02:26:38.295Z] [INFO] error: Failed to fetch: `https://pypi.org/simple/requests/`
+[2025-10-29T02:26:38.296Z] [INFO]   Caused by: Request failed after 3 retries
+[2025-10-29T02:26:38.296Z] [INFO]   Caused by: error sending request for url (https://pypi.org/simple/requests/)
+[2025-10-29T02:26:38.296Z] [INFO]   Caused by: client error (Connect)
+[2025-10-29T02:26:38.297Z] [ERROR] Install windows app sdk failed! 
+[2025-10-29T02:26:38.296Z] [INFO]   Caused by: dns error
+[2025-10-29T02:26:38.296Z] [INFO]   Caused by: No such host is known. (os error 11001)
+supportedRuntime init failed!

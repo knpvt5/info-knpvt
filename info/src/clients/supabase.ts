@@ -29,13 +29,47 @@ export async function saveUserInfo(userInfoData: z.infer<typeof userInfoSchema>)
     }
 }
 
-const { data } = await supabase.from("user_info").select("*");
 
-const parsedData = userInfoSchema.array().safeParse(data);
+// Fetch and validate existing data (call this from a component when needed)
+export async function fetchUserInfo() {
+    const { data, error } = await supabase.from("user_info").select("*");
 
+    if (error) {
+        console.error("Error fetching data:", error);
+        throw error;
+    }
 
-if (parsedData.success === false) {
-    console.error("Data validation failed:", parsedData.error);
-} else {
+    const parsedData = userInfoSchema.array().safeParse(data);
+
+    if (!parsedData.success) {
+        console.error("Data validation failed:", parsedData.error);
+        throw new Error("Invalid data format");
+    }
+
     console.log("Parsed data:", parsedData.data);
+    return parsedData.data;
 }
+
+fetchUserInfo()
+
+
+// Export function to call Edge Function (instead of top-level call)
+export async function callNodeApi(name: string) {
+    const { data, error } = await supabase.functions.invoke('node-api', {
+        body: { name },
+    });
+
+    if (error) {
+        console.error("Error invoking edge function:", error);
+        throw error;
+    }
+    
+    console.log("Edge function response:", data);
+    return data;
+}
+
+callNodeApi('Functions').then(response => {
+    console.log("Response from Edge Function:", response);
+}).catch(error => {
+    console.error("Error calling Edge Function:", error);
+});

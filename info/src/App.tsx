@@ -5,42 +5,12 @@ import { getIpAddress, getLatLon, getAddress } from "./utils";
 import { saveUserInfo } from "./clients/supabase";
 
 import { userInfoSchema } from "./types";
+import type { locationData } from "./types";
 import { UserinfoPage } from "./pages/userInfo/userinfoPage";
 import { Header } from "./components/header";
 
-
-export interface LocationData {
-  ip: string;
-  network: string;
-  version: string;
-  city: string;
-  region: string;
-  region_code: string;
-  country: string;
-  country_name: string;
-  country_code: string;
-  country_code_iso3: string;
-  country_capital: string;
-  country_tld: string;
-  continent_code: string;
-  in_eu: boolean;
-  postal: string;
-  latitude: number;
-  longitude: number;
-  timezone: string;
-  utc_offset: string;
-  country_calling_code: string;
-  currency: string;
-  currency_name: string;
-  languages: string;
-  country_area: number;
-  country_population: number;
-  asn: string;
-  org: string;
-}
-
 function App() {
-  const [locationData, setLocationData] = useState<LocationData | null>(null);
+  const [locationData, setLocationData] = useState<locationData | null>(null);
   const [address, setAddress] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -74,6 +44,8 @@ function App() {
         };
 
         const parsed = userInfoSchema.safeParse(userInfo);
+
+        console.log("parsed", parsed)
 
         if (!parsed.success) {
           console.error("Failed to validate user info payload", parsed.error);

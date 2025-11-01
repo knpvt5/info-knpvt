@@ -1,9 +1,14 @@
 import React from "react";
 import "./userinfoPage.css";
 
+import type { locationData } from "../../types";
 
+interface UserinfoPageProps {
+  locationData: locationData | null;
+  address: string;
+}
 
-export function UserinfoPage({locationData, address}) {
+export function UserinfoPage({ locationData, address }: UserinfoPageProps) {
   return (
     <div className="container">
       <h1 className="title">🌍 Your Location Information</h1>
@@ -22,23 +27,15 @@ export function UserinfoPage({locationData, address}) {
           <div className="info-group">
             <div className="info-item">
               <span className="label">IP Address:</span>
-              <span className="value">{locationData?.ip}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Network:</span>
-              <span className="value">{locationData?.network}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Version:</span>
-              <span className="value">{locationData?.version}</span>
+              <span className="value">{locationData?.ipaddress}</span>
             </div>
             <div className="info-item">
               <span className="label">ISP:</span>
-              <span className="value">{locationData?.org}</span>
+              <span className="value">{locationData?.isp}</span>
             </div>
             <div className="info-item">
               <span className="label">ASN:</span>
-              <span className="value">{locationData?.asn}</span>
+              {/* <span className="value">{locationData?.as}</span> */}
             </div>
           </div>
         </div>
@@ -49,22 +46,23 @@ export function UserinfoPage({locationData, address}) {
           <div className="info-group">
             <div className="info-item">
               <span className="label">City:</span>
-              <span className="value">{locationData?.city}</span>
+              <span className="value">{locationData?.state}</span>
             </div>
             <div className="info-item">
               <span className="label">Region:</span>
               <span className="value">
-                {locationData?.region} ({locationData?.region_code})
+                {locationData?.region} ({locationData?.zip})
               </span>
             </div>
-            <div className="info-item">
+            {/* <div className="info-item">
               <span className="label">Postal Code:</span>
               <span className="value">{locationData?.postal}</span>
-            </div>
+            </div> */}
             <div className="info-item">
               <span className="label">Coordinates:</span>
               <span className="value">
-                {locationData?.latitude}°N, {locationData?.longitude}°E
+                {/* {locationData?.coordinates[0]}°N, {locationData?.coordinates[1]}°E */}
+                {locationData?.coordinates}
               </span>
             </div>
           </div>
@@ -76,31 +74,17 @@ export function UserinfoPage({locationData, address}) {
           <div className="info-group">
             <div className="info-item">
               <span className="label">Country:</span>
-              <span className="value">{locationData?.country_name}</span>
+              <span className="value">{locationData?.country}</span>
             </div>
             <div className="info-item">
               <span className="label">Country Code:</span>
               <span className="value">
-                {locationData?.country_code} / {locationData?.country_code_iso3}
+                {/* {locationData?.countryCode}  */}
               </span>
             </div>
             <div className="info-item">
               <span className="label">Capital:</span>
-              <span className="value">{locationData?.country_capital}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Continent:</span>
-              <span className="value">{locationData?.continent_code}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">TLD:</span>
-              <span className="value">{locationData?.country_tld}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">In EU:</span>
-              <span className="value">
-                {locationData?.in_eu ? "Yes" : "No"}
-              </span>
+              <span className="value">{locationData?.capital}</span>
             </div>
           </div>
         </div>
@@ -112,45 +96,6 @@ export function UserinfoPage({locationData, address}) {
             <div className="info-item">
               <span className="label">Timezone:</span>
               <span className="value">{locationData?.timezone}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">UTC Offset:</span>
-              <span className="value">{locationData?.utc_offset}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Calling Code:</span>
-              <span className="value">
-                {locationData?.country_calling_code}
-              </span>
-            </div>
-            <div className="info-item">
-              <span className="label">Currency:</span>
-              <span className="value">
-                {locationData?.currency_name} ({locationData?.currency})
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Statistics */}
-        <div className="card full-width">
-          <h3>📊 Country Statistics</h3>
-          <div className="info-group">
-            <div className="info-item">
-              <span className="label">Population:</span>
-              <span className="value">
-                {locationData?.country_population.toLocaleString()}
-              </span>
-            </div>
-            <div className="info-item">
-              <span className="label">Area:</span>
-              <span className="value">
-                {locationData?.country_area.toLocaleString()} km²
-              </span>
-            </div>
-            <div className="info-item full-width">
-              <span className="label">Languages:</span>
-              <span className="value languages">{locationData?.languages}</span>
             </div>
           </div>
         </div>

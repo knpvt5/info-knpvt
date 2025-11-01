@@ -12,3 +12,5 @@ export const userInfoSchema = z.object({
     isp: z.string(),
 });
 
+
+export type locationData = z.infer<typeof userInfoSchema>;

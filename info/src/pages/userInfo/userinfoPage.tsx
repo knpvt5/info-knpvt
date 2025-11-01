@@ -1,4 +1,4 @@
-import "./userinfoPage.css";
+import "./userInfoPage.css";
 
 import type { locationData } from "../../types";
 

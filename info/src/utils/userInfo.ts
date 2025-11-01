@@ -26,7 +26,7 @@ export async function saveUserInfo(userInfoData: z.infer<typeof userInfoSchema>)
 
 // Fetch and validate existing data (call this from a component when needed)
 export async function fetchUserInfo() {
-    const { data, error } = await supabase.from("user_info").select("*");
+    const { data, error } = await supabase.from("user_info").select("*").order('created_at', { ascending: false });
 
     if (error) {
         console.error("Error fetching data:", error);

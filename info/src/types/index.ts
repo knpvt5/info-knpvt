@@ -10,6 +10,8 @@ export const userInfoSchema = z.object({
     region: z.string(),
     timezone: z.string(),
     isp: z.string(),
+    id: z.number().optional(),
+    created_at: z.string().optional(),
 });
 
 

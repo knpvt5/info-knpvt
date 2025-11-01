@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import "./header.css";
 
 export const Header = () => {
@@ -17,9 +18,9 @@ export const Header = () => {
       <div className="header-container">
         {/* Logo */}
         <div className="logo">
-          <a href="/">
+          <Link to="/" onClick={closeMenu}>
             <span className="logo-text">LocationInfo</span>
-          </a>
+          </Link>
         </div>
 
         {/* Hamburger Menu Button */}
@@ -37,29 +38,29 @@ export const Header = () => {
         <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <a href="/" onClick={closeMenu}>
+              <Link to="/" onClick={closeMenu}>
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="/about" onClick={closeMenu}>
+              <Link to="/about" onClick={closeMenu}>
                 About
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="/services" onClick={closeMenu}>
+              <Link to="/services" onClick={closeMenu}>
                 Services
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="/contact" onClick={closeMenu}>
+              <Link to="/contact" onClick={closeMenu}>
                 Contact
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="/profile" onClick={closeMenu}>
+              <Link to="/profile" onClick={closeMenu}>
                 Profile
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

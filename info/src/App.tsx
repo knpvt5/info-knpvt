@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router";
 import "./App.css";
 
 import { getIpAddress, getLatLon, getAddress } from "./utils";
@@ -10,7 +11,9 @@ import { UserinfoPage } from "./pages/userInfo/userinfoPage";
 import { Header } from "./components/header";
 
 function App() {
-  const [locationData, setLocationData] = useState<locationData | undefined>(undefined);
+  const [locationData, setLocationData] = useState<locationData | undefined>(
+    undefined
+  );
   const [address, setAddress] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -44,7 +47,7 @@ function App() {
 
         const parsed = userInfoSchema.safeParse(userInfo);
 
-        console.log("parsed", parsed)
+        console.log("parsed", parsed);
 
         setLocationData(parsed.data);
 
@@ -90,7 +93,14 @@ function App() {
   return (
     <>
       <Header />
-      <UserinfoPage locationData={locationData} address={address} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <UserinfoPage locationData={locationData} address={address} />
+          }
+        />
+      </Routes>
     </>
   );
 }

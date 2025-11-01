@@ -7,7 +7,7 @@ import { saveUserInfo } from "./clients/supabase";
 import { userInfoSchema } from "./types";
 import { UserinfoPage } from "./pages/userInfo/userinfoPage";
 
-interface LocationData {
+export interface LocationData {
   ip: string;
   network: string;
   version: string;

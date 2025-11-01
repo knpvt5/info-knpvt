@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { Routes, Route } from "react-router";
 import "./App.css";
 
-import { getIpAddress, getLatLon, getAddress } from "./utils";
-import { saveUserInfo } from "./clients/supabase";
+import { getIpAddress, getLatLon, getAddress, saveUserInfo } from "./utils";
 
 import { userInfoSchema } from "./types";
 import type { locationData } from "./types";
@@ -66,6 +65,10 @@ function App() {
     };
 
     getLocation();
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log("Geolocation position:", position);
+    });
   }, []);
 
   if (loading) {
@@ -96,6 +99,12 @@ function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            <UserinfoPage locationData={locationData} address={address} />
+          }
+        />
+        <Route
+          path="/profile"
           element={
             <UserinfoPage locationData={locationData} address={address} />
           }

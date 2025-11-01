@@ -49,7 +49,8 @@ export function getIpAddress(): Promise<string> {
 
 export async function getLatLon(ip: string) {
     // const ipApi  = `https://ipapi.co/${ip}/json/`;
-    const ipApi  = `http://ip-api.com/json/${ip}`;
+    // const ipApi  = `https://ip-api.com/json/${ip}`;
+    const ipApi  = `https://ipwhois.app/json/${ip}`;
 
     const response = await fetch(ipApi);
     const data = await response.json();

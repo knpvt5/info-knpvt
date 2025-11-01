@@ -30,17 +30,17 @@ function App() {
 
         console.log("full data from getLatLon:", data);
 
-        const addressResult = await getAddress(data.lat, data.lon);
+        const addressResult = await getAddress(data.latitude, data.longitude);
         console.log("region from getAddress:", addressResult);
         setAddress(addressResult);
 
         const userInfo = {
           ipaddress: ipAddress,
-          coordinates: [data.lat, data.lon] as [number, number],
+          coordinates: [data.latitude, data.longitude] as [number, number],
           country: data.country,
-          capital: data.regionName,
-          state: data.city,
-          zip: Number(data.zip),
+          capital: data.country_capital,
+          state: data.region,
+          zip: null,
           region: addressResult,
           timezone: data.timezone,
           isp: data.isp,
@@ -59,7 +59,7 @@ function App() {
 
         await saveUserInfo(parsed.data);
       } catch (err) {
-        setError("Failed to fetch location data");
+        setError("Failed to fetching data");
         console.error(err);
       } finally {
         setLoading(false);

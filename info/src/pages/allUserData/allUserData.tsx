@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchUserInfo } from "../../utils";
 import type { locationData } from "../../types";
 import "./allUserData.css";
+import UserDataAccessFirewall from "../../firewall/userDataAccessFirewall";
 
 export function AllUserData() {
+  const [hasUserDataAccess, sethasUserDataAccess] = useState<boolean>(false);
+
   const [userData, setUserData] = useState<locationData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -11,6 +14,8 @@ export function AllUserData() {
   useEffect(() => {
     const getData = async () => {
       try {
+        if (!hasUserDataAccess) return;
+
         setLoading(true);
         const data = await fetchUserInfo();
         console.log("Fetched user info data:", data);
@@ -24,7 +29,11 @@ export function AllUserData() {
       }
     };
     getData();
-  }, []);
+  }, [hasUserDataAccess]);
+
+  if (!hasUserDataAccess) {
+    return <UserDataAccessFirewall sethasUserDataAccess={sethasUserDataAccess} />;
+  }
 
   if (loading) {
     return (
@@ -62,7 +71,9 @@ export function AllUserData() {
   return (
     <div className="all-user-data-container">
       <h1 className="all-users-title">🌐 All User Data</h1>
-      <p className="users-count">Total Users: <strong>{userData.length}</strong></p>
+      <p className="users-count">
+        Total Users: <strong>{userData.length}</strong>
+      </p>
 
       <div className="users-grid">
         {userData.map((user, index) => (
@@ -85,7 +96,8 @@ export function AllUserData() {
               <div className="detail-row">
                 <span className="detail-label">📍 Coordinates</span>
                 <span className="detail-value">
-                  {user.coordinates[0].toFixed(4)}, {user.coordinates[1].toFixed(4)}
+                  {user.coordinates[0].toFixed(4)},{" "}
+                  {user.coordinates[1].toFixed(4)}
                 </span>
               </div>
 
@@ -122,7 +134,9 @@ export function AllUserData() {
               <div className="detail-row">
                 <span className="detail-label">📅 Created At</span>
                 <span className="detail-value">
-                  {user.created_at ? new Date(user.created_at as string).toLocaleString() : "—"}
+                  {user.created_at
+                    ? new Date(user.created_at as string).toLocaleString()
+                    : "—"}
                 </span>
               </div>
             </div>

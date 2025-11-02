@@ -1,9 +1,80 @@
-import React from 'react'
+import React, { useState } from "react";
+import "./userDataAccessFirewall.css";
+import { getAccessPass } from "../utils";
 
-export default function UserDataAccessFirewall() {
+export default function UserDataAccessFirewall({
+  sethasUserDataAccess,
+}: Readonly<{
+  sethasUserDataAccess: React.Dispatch<React.SetStateAction<boolean>>;
+}>) {
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
 
-    const accesspass = "12345"
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const hasAccess = await getAccessPass();
+
+    if (password === hasAccess.dataAccessPasss) {
+      console.log("Password match ✅");
+      sethasUserDataAccess(true);
+      // You can add success logic here (e.g., redirect, show content)
+    } else {
+      console.log("Password incorrect ❌");
+      sethasUserDataAccess(false);
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 500);
+      setPassword(""); // Clear the password field
+    }
+  };
+
   return (
-    <div>userDataAccessFirewall</div>
-  )
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <div className="lock-icon">🔐</div>
+          <h1 className="auth-title">Access Control</h1>
+          <p className="auth-subtitle">Enter your password to continue</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className={isShaking ? "shake" : ""}>
+          <div className="input-group">
+            <label htmlFor="password" className="input-label">
+              Password
+            </label>
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                className="password-input"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoFocus
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? "👁️" : "👁️‍🗨️"}
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" className="submit-button">
+            <span className="button-text">Unlock</span>
+            <span className="button-icon">🔓</span>
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <p className="footer-text">🔒 Secured Access</p>
+        </div>
+      </div>
+    </div>
+  );
 }

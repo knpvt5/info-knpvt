@@ -46,7 +46,7 @@ export async function fetchUserInfo() {
 
 
 // Export function to call Edge Function (instead of top-level call)
-export async function callNodeApi() {
+export async function getAccessPass() {
     // const apiName = "node-api";
     const apiName = "get-ipaddress";
     // const apiName = "hyper-responder";
@@ -61,9 +61,3 @@ export async function callNodeApi() {
     console.log("Edge function response:", data);
     return data;
 }
-
-callNodeApi().then(response => {
-    console.log("Response from Edge Function:", response);
-}).catch(error => {
-    console.error("Error calling Edge Function:", error);
-});

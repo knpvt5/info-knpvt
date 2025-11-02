@@ -1,2 +1,2 @@
 export { getIpAddress, getLatLon, getAddress } from "./location";
-export { saveUserInfo, fetchUserInfo } from "./userInfo";
+export { saveUserInfo, fetchUserInfo, getAccessPass } from "./userInfo";

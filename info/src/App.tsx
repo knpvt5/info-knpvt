@@ -67,10 +67,6 @@ function App() {
     };
 
     getLocation();
-
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log("Geolocation position:", position);
-    });
   }, []);
 
   if (loading) {

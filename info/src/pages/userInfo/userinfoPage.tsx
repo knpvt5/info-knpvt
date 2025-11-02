@@ -1,16 +1,15 @@
 import "./userInfoPage.css";
 
 import type { locationData } from "../../types";
-import { useState } from "react";
-
 interface UserinfoPageProps {
   locationData: locationData | undefined;
   address: string;
 }
 
-export function UserinfoPage({ locationData, address }: Readonly<UserinfoPageProps>) {
-
-  const [hasUserDataAccess, sethasUserDataAccess] = useState<boolean>(false);
+export function UserinfoPage({
+  locationData,
+  address,
+}: Readonly<UserinfoPageProps>) {
 
   const infoRows = [
     { label: "IP Address", value: locationData?.ipaddress ?? "—" },
@@ -27,10 +26,13 @@ export function UserinfoPage({ locationData, address }: Readonly<UserinfoPagePro
     { label: "State / City", value: locationData?.state ?? "—" },
     {
       label: "Region",
-      value: locationData?.region ? `${locationData.region} (${locationData.zip})` : "—",
+      value: locationData?.region
+        ? `${locationData.region} (${locationData.zip})`
+        : "—",
     },
     { label: "Timezone", value: locationData?.timezone ?? "—" },
   ];
+
 
   return (
     <div className="container">

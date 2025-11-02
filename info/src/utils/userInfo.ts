@@ -14,7 +14,7 @@ export async function saveUserInfo(userInfoData: z.infer<typeof userInfoSchema>)
         .from('user_info')
         .insert([userInfoData]);
 
-    console.log(data)
+    // console.log(data)
 
     if (error) {
         console.error('Error inserting data:', error);

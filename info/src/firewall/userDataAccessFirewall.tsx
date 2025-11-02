@@ -10,6 +10,7 @@ export default function UserDataAccessFirewall({
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,11 +20,16 @@ export default function UserDataAccessFirewall({
     if (password.trim() === hasAccess.dataAccessPass) {
     //   console.log("Password match ✅");
       sethasUserDataAccess(true);
+      setErrorMessage("");
     } else {
     //   console.log("Password incorrect ❌");
       sethasUserDataAccess(false);
+      setErrorMessage("❌ Incorrect password. Please try again.");
       setIsShaking(true);
-      setTimeout(() => setIsShaking(false), 500);
+      setTimeout(() => {
+        setIsShaking(false);
+        setErrorMessage("");
+      }, 3000);
       setPassword("");
     }
   };
@@ -62,6 +68,11 @@ export default function UserDataAccessFirewall({
                 {showPassword ? "👁️" : "👁️‍🗨️"}
               </button>
             </div>
+            {errorMessage && (
+              <div className="error-message-box">
+                <p>{errorMessage}</p>
+              </div>
+            )}
           </div>
 
           <button type="submit" className="submit-button">

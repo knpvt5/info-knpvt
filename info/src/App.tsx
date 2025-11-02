@@ -24,14 +24,14 @@ function App() {
       try {
         setLoading(true);
         const ipAddress = await getIpAddress();
-        console.log("ipAddress:", ipAddress);
+        // console.log("ipAddress:", ipAddress);
 
         const data = await getLatLon(ipAddress);
 
-        console.log("full data from getLatLon:", data);
+        // console.log("full data from getLatLon:", data);
 
         const addressResult = await getAddress(data.latitude, data.longitude);
-        console.log("region from getAddress:", addressResult);
+        // console.log("region from getAddress:", addressResult);
         setAddress(addressResult);
 
         const userInfo = {
@@ -48,7 +48,7 @@ function App() {
 
         const parsed = userInfoSchema.safeParse(userInfo);
 
-        console.log("parsed", parsed);
+        // console.log("parsed", parsed);
 
         setLocationData(parsed.data);
 

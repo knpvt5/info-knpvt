@@ -16,16 +16,15 @@ export default function UserDataAccessFirewall({
 
     const hasAccess = await getAccessPass();
 
-    if (password === hasAccess.dataAccessPasss) {
-      console.log("Password match ✅");
+    if (password.trim() === hasAccess.dataAccessPass) {
+    //   console.log("Password match ✅");
       sethasUserDataAccess(true);
-      // You can add success logic here (e.g., redirect, show content)
     } else {
-      console.log("Password incorrect ❌");
+    //   console.log("Password incorrect ❌");
       sethasUserDataAccess(false);
       setIsShaking(true);
       setTimeout(() => setIsShaking(false), 500);
-      setPassword(""); // Clear the password field
+      setPassword("");
     }
   };
 

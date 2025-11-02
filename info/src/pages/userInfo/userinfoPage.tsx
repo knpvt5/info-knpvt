@@ -1,6 +1,7 @@
 import "./userInfoPage.css";
 
 import type { locationData } from "../../types";
+import { useState } from "react";
 
 interface UserinfoPageProps {
   locationData: locationData | undefined;
@@ -8,6 +9,9 @@ interface UserinfoPageProps {
 }
 
 export function UserinfoPage({ locationData, address }: Readonly<UserinfoPageProps>) {
+
+  const [hasUserDataAccess, sethasUserDataAccess] = useState<boolean>(false);
+
   const infoRows = [
     { label: "IP Address", value: locationData?.ipaddress ?? "—" },
     { label: "ISP", value: locationData?.isp ?? "—" },

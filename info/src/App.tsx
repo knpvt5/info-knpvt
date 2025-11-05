@@ -10,6 +10,7 @@ import { UserinfoPage } from "./pages/userInfo/userinfoPage";
 import { Header } from "./components/header";
 import Homepage from "./pages/homepage";
 import { AllUserData } from "./pages/allUserData/allUserData";
+import { PopupProvider } from "./contexts/popupContext";
 
 function App() {
   const [locationData, setLocationData] = useState<locationData | undefined>(
@@ -92,7 +93,7 @@ function App() {
   }
 
   return (
-    <>
+    <PopupProvider>
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -109,7 +110,7 @@ function App() {
           }
         />
       </Routes>
-    </>
+    </PopupProvider>
   );
 }
 

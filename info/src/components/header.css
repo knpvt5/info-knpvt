@@ -9,6 +9,20 @@
   z-index: 100;
 }
 
+.popup-message{
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(173, 17, 17, 0.8);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  animation: fadeInOut 3s ease forwards;
+}
+
 .header-container {
   max-width: 1400px;
   margin: 0 auto;

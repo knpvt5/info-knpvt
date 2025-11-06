@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router";
 import "./App.css";
 
-
 import { getLatLon, getAddress, saveUserInfo, getAccessPass } from "./utils";
 
 import { userInfoSchema } from "./types";
@@ -12,7 +11,6 @@ import { Header } from "./components/header";
 import Homepage from "./pages/homepage";
 import { AllUserData } from "./pages/allUserData/allUserData";
 import { usePopup } from "./contexts/popupContext";
-
 
 function App() {
   const [locationData, setLocationData] = useState<locationData | undefined>(
@@ -27,8 +25,8 @@ function App() {
     const getLocation = async () => {
       try {
         setLoading(true);
-        
-        const ipAddress = await getAccessPass("ip").then(res => res.ip);
+
+        const ipAddress = await getAccessPass("ip").then((res) => res.ip);
         // console.log("ipAddress:", ipAddress);
 
         const data = await getLatLon(ipAddress);
@@ -73,16 +71,6 @@ function App() {
     };
 
     getLocation();
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log("User's current position:", position);
-      },
-      (error) => {
-        console.error("Error getting user's location:", error);
-      }
-    );
-
   }, [setPopupMsg]);
 
   if (loading) {
@@ -95,7 +83,6 @@ function App() {
       </div>
     );
   }
-
 
   return (
     <>
